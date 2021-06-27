@@ -1,0 +1,18 @@
+version: '3.8'
+
+services:
+  dns:
+    build: .
+    container_name: dns
+    restart: always
+    environment:
+      UPSTREAM_SERVER: 1.1.1.1
+    volumes:
+      - dnsmasq_data:/etc/dnsmasq/
+    ports:
+      - "53:53/udp"
+    cap_add:
+      - NET_ADMIN
+
+volumes:
+  dnsmasq_data:
